@@ -5,6 +5,7 @@
   ],
   "routes": [
     { "src": "/api/stories/story", "dest": "/api/stories/story.js" },
-    { "src": "/api/stories/detail", "dest": "/api/stories/detail.js" }
+    { "src": "/api/stories/detail", "dest": "/api/stories/detail.js" },
+    { "src": "/api/stories/testSupabase", "dest": "/api/stories/testSupabase.js" }
   ]
 }
