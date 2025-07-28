@@ -2,12 +2,12 @@ const { getAllStories, getStoryById, addStory } = require('../../controllers/sto
 
 module.exports = async function handler(req, res) {
   try {
-    const parts = req.url.split('/');
-    const id = parts.length > 3 ? parts[3] : null;
+    const { method, query } = req;
 
-    if (req.method === 'GET') {
+    if (method === 'GET') {
+      const id = query.id;
       if (id) {
-        const story = await getStoryById(id);
+        const story = await getStoryById(Number(id));
         if (!story) return res.status(404).json({ error: 'Not found' });
         return res.status(200).json(story);
       } else {
@@ -16,7 +16,7 @@ module.exports = async function handler(req, res) {
       }
     }
 
-    if (req.method === 'POST') {
+    if (method === 'POST') {
       const { title, url, img } = req.body;
       const story = await addStory({ title, url, img });
       return res.status(201).json(story);
