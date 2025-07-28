@@ -1,22 +1,19 @@
-const { getAllStories, getStoryById, addStory } = require('../../controllers/storyController');
+import { getAllStories, addStory } from '../../controllers/storyController.js';
 
-module.exports = async function handler(req, res) {
+export const config = {
+  api: {
+    bodyParser: true,
+  },
+};
+
+export default async function handler(req, res) {
   try {
-    const { method, query } = req;
-
-    if (method === 'GET') {
-      const id = query.id;
-      if (id) {
-        const story = await getStoryById(Number(id));
-        if (!story) return res.status(404).json({ error: 'Not found' });
-        return res.status(200).json(story);
-      } else {
-        const stories = await getAllStories();
-        return res.status(200).json(stories);
-      }
+    if (req.method === 'GET') {
+      const stories = await getAllStories();
+      return res.status(200).json(stories);
     }
 
-    if (method === 'POST') {
+    if (req.method === 'POST') {
       const { title, url, img } = req.body;
       const story = await addStory({ title, url, img });
       return res.status(201).json(story);
@@ -26,4 +23,4 @@ module.exports = async function handler(req, res) {
   } catch (err) {
     return res.status(500).json({ error: err.message });
   }
-};
+}
