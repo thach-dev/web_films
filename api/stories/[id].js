@@ -1,6 +1,6 @@
-import { supabase } from '../../lib/supabaseClient.js';
+const { supabase } = require('../../lib/supabaseClient');
 
-export default async function handler(req, res) {
+module.exports = async function handler(req, res) {
   const { id } = req.query;
 
   if (req.method === 'GET') {
@@ -24,6 +24,3 @@ export default async function handler(req, res) {
     if (error) return res.status(500).json({ error: error.message });
     return res.status(204).end();
   }
-
-  res.status(405).json({ error: 'Method Not Allowed' });
-}

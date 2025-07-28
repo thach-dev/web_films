@@ -1,9 +1,10 @@
 {
   "version": 2,
   "builds": [
-    { "src": "api/*.js", "use": "@vercel/node" }
+    { "src": "api/**/*.js", "use": "@vercel/node" }
   ],
   "routes": [
-    { "src": "/api/stories/story", "dest": "/api/stories/story.js" }
+    { "src": "/api/stories/story", "dest": "/api/stories/story.js" },
+    { "src": "/api/stories/(.*)", "dest": "/api/stories/[id].js" }
   ]
 }
