@@ -11,18 +11,14 @@ export async function getStoryById(id) {
     .from('story')
     .select('*')
     .eq('id', id)
-    .single(); // Chỉ lấy 1 bản ghi
+    .single();
 
   if (error) throw new Error(error.message);
   return data;
 }
 
 export async function addStory({ title, url, img }) {
-  const { data, error } = await supabase
-    .from('story')
-    .insert([{ title, url, img }])
-    .select(); 
-
+  const { data, error } = await supabase.from('story').insert([{ title, url, img }]);
   if (error) throw new Error(error.message);
-  return data[0];
+  return data;
 }
