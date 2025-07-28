@@ -4,7 +4,6 @@
     { "src": "api/**/*.js", "use": "@vercel/node" }
   ],
   "routes": [
-    { "src": "/api/stories/story", "dest": "/api/stories/story.js" },
-   
+    { "src": "/api/stories/story(?:/(?<id>[^/]+))?", "dest": "/api/stories/story.js" }
   ]
 }
