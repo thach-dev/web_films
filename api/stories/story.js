@@ -1,10 +1,19 @@
-const { getAllStories, addStory } = require('../../controllers/storyController');
+const { getAllStories, getStoryById, addStory } = require('../../controllers/storyController');
 
 module.exports = async function handler(req, res) {
   try {
+    const parts = req.url.split('/');
+    const id = parts.length > 3 ? parts[3] : null;
+
     if (req.method === 'GET') {
-      const stories = await getAllStories();
-      return res.status(200).json(stories);
+      if (id) {
+        const story = await getStoryById(id);
+        if (!story) return res.status(404).json({ error: 'Not found' });
+        return res.status(200).json(story);
+      } else {
+        const stories = await getAllStories();
+        return res.status(200).json(stories);
+      }
     }
 
     if (req.method === 'POST') {
