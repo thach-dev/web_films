@@ -7,10 +7,6 @@
     {
       "src": "/api/stories",
       "dest": "/api/stories/index.js"
-    },
-    {
-      "src": "/api/stories/(?<id>[^/]+)",
-      "dest": "/api/stories/[id].js"
     }
   ]
 }
