@@ -11,8 +11,16 @@ export async function loginUser(req, res) {
   }
 
   try {
+    // 1. Lấy user theo username
+    const { data: user, error: userError } = await getUserByUsername(username);
+
+    if (userError || !user) {
+      return res.status(401).json({ error: 'Tài khoản không tồn tại' });
+    }
+
+    // 2. Dùng email để đăng nhập
     const { data, error } = await supabase.auth.signInWithPassword({
-      email: username, 
+      email: user.email,
       password,
     });
 
