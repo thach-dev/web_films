@@ -1,20 +1,17 @@
-import { getStoryById } from '../../controllers/storyController.js';
-
-export const config = {
-  api: {
-    bodyParser: true,
-  },
-};
-
 export default async function handler(req, res) {
   const {
     query: { id },
+    url,
   } = req;
+
+  console.log('Query:', req.query);
+  console.log('URL:', url);
+  console.log('Raw ID:', id);
 
   if (req.method === 'GET') {
     const parsedId = parseInt(id);
     if (isNaN(parsedId)) {
-      return res.status(400).json({ error: 'Invalid ID format' });
+      return res.status(400).json({ error: `Invalid ID format: ${id}` });
     }
 
     try {
