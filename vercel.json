@@ -6,7 +6,7 @@
   "routes": [
     {
       "src": "/api/stories",
-      "dest": "/api/stories/story.js"
+      "dest": "/api/stories/index.js"
     },
     {
       "src": "/api/stories/(?<id>[^/]+)",
