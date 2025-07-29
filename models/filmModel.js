@@ -11,8 +11,7 @@ export async function getFilmByIdModel(id) {
   const { data, error } = await supabase
     .from('list_video')
     .select('*')
-    .eq('id', id)
-    .single();
+    .eq('id', id);
   if (error) throw new Error(error.message);
   return data;
 }
