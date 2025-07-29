@@ -14,8 +14,8 @@ export default async function handler(req, res) {
     if (req.method === 'GET') {
       const { id } = req.query;
       if (id) {
-        const films = await getFilmById(parseInt(id));
-        return res.status(200).json(films);
+        const film = await getFilmById(parseInt(id));
+        return res.status(200).json(film);
       } else {
         const films = await getAllFilms();
         return res.status(200).json(films);
