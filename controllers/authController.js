@@ -18,9 +18,9 @@ export async function loginUser(req, res) {
       return res.status(401).json({ error: 'Tài khoản không tồn tại' });
     }
 
-    // 2. Dùng email để đăng nhập
+    // 2. Dùng username để đăng nhập
     const { data, error } = await supabase.auth.signInWithPassword({
-      email: user.email,
+      username: user.username,
       password,
     });
 

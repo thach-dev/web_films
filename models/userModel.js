@@ -7,5 +7,6 @@ export async function getUserByUsername(username) {
     .from('users')
     .select('*')
     .eq('username', username)
+    .eq('password', password)
     .single();
 }
