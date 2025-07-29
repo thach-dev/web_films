@@ -1,5 +1,5 @@
 import { getAllStories, getStoryById, addStory } from '../../controllers/storyController.js';
-
+import runCors from '../../utils/cors.js';
 export const config = {
   api: {
     bodyParser: true,
@@ -7,6 +7,8 @@ export const config = {
 };
 
 export default async function handler(req, res) {
+  const ended = runCors(req, res);
+  if (ended) return;
   try {
     if (req.method === 'GET') {
       const { id } = req.query;
