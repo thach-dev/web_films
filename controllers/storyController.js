@@ -1,18 +1,17 @@
-import { supabase } from '../lib/supabaseClient.js';
+import {
+  getAllStoriesModel,
+  getStoryByIdModel,
+  addStoryModel,
+} from '../models/storyModel.js';
 
 export async function getAllStories() {
-  const { data, error } = await supabase.from('story').select('*');
-  if (error) throw new Error(error.message);
-  return data;
+  return await getAllStoriesModel();
 }
 
 export async function getStoryById(id) {
-  const { data, error } = await supabase
-    .from('story')
-    .select('*')
-    .eq('id', id)
-    .single();
+  return await getStoryByIdModel(id);
+}
 
-  if (error) throw new Error(error.message);
-  return data;
+export async function addStory({ title, url, img }) {
+  return await addStoryModel({ title, url, img });
 }
