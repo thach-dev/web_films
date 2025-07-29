@@ -8,6 +8,9 @@ export const config = {
 };
 
 export default async function handler(req, res) {
+  const ended = runCors(req, res);
+  if (ended) return;
+  
   if (req.method === 'POST') {
     await loginUser(req, res);
   } else {
