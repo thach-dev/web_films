@@ -1,4 +1,11 @@
+// pages/api/auth/login.js hoặc tương đương
 import { loginUser } from '../../controllers/authController';
+
+export const config = {
+  api: {
+    bodyParser: true,
+  },
+};
 
 export default async function handler(req, res) {
   if (req.method === 'POST') {
