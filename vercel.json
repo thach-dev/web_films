@@ -7,6 +7,10 @@
     {
       "src": "/api/stories",
       "dest": "/api/stories/story.js"
+    },
+    {
+      "src": "/api/films",
+      "dest": "/api/films/film.js"
     }
   ]
 }
