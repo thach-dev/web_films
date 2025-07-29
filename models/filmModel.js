@@ -16,11 +16,4 @@ export async function getFilmByIdModel(id) {
   return data;
 }
 
-export async function addFilmModel({ title, url, img }) {
-  const { data, error } = await supabase
-    .from('list_video')
-    .insert([{ title, url, img }])
-    .single();
-  if (error) throw new Error(error.message);
-  return data;
-}
+
