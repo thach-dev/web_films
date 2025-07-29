@@ -10,6 +10,7 @@ export default async function handler(req, res) {
   const ended = runCors(req, res);
   if (ended) return;
   try {
+    res.setHeader('Cache-Control', 'no-store');
     if (req.method === 'GET') {
       const { id } = req.query;
       if (id) {
