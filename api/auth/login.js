@@ -1,6 +1,6 @@
 // pages/api/auth/login.js hoặc tương đương
 import { loginUser } from '../../controllers/authController';
-
+import runCors from '../../utils/cors.js';
 export const config = {
   api: {
     bodyParser: true,
