@@ -1,4 +1,4 @@
-import { getAllFilms, getFilmsById, addFilm } from '../../controllers/filmController.js';
+import { getAllFilms, getFilmById, addFilm } from '../../controllers/filmController.js';
 import runCors from '../../utils/cors.js';
 export const config = {
   api: {
@@ -13,7 +13,7 @@ export default async function handler(req, res) {
     if (req.method === 'GET') {
       const { id } = req.query;
       if (id) {
-        const films = await getFilmsById(parseInt(id));
+        const films = await getFilmById(parseInt(id));
         return res.status(200).json(films);
       } else {
         const films = await getAllFilms();
