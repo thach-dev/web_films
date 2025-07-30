@@ -20,7 +20,7 @@ export async function loginUser(req, res) {
 
     // 2. Dùng username để đăng nhập
     const { data, error } = await supabase.auth.signInWithPassword({
-      username: user.username,
+      email: user.email,
       password,
     });
 
