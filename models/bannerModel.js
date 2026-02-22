@@ -1,4 +1,4 @@
-import { supabase } from '../utils/cors.js';
+import { supabase } from '../lib/supabaseClient.js';
 export async function getBannerModel() {
   const { data, error } = await supabase.from('banner').select('*').order('id', { ascending: true });
 
