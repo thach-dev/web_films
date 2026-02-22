@@ -1,3 +1,4 @@
+import { supabase } from '../utils/supabaseClient.js';
 export async function getBannerModel() {
   const { data, error } = await supabase
     .from('banner')
