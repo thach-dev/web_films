@@ -1,4 +1,4 @@
-import { getBannerModel } from '../models/bannerModel';
+import { getBannerModel } from '../models/bannerModel.js';
 export async function getBanner(req, res) {
   try {
     res.setHeader('Cache-Control', 'no-store');
