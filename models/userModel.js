@@ -7,9 +7,7 @@ export async function getUserByUsername(username, password) {
     .from('users')
     .select('*')
     .eq('username', username)
-    .eq('password', password)
     .single();
-  console.log('get full user name', tempt);
   
     return tempt;
 }
