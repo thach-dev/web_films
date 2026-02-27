@@ -1,6 +1,9 @@
 import { supabase } from "../../lib/supabaseClient.js";
+import runCors from '../../utils/cors.js';
 
 export default async function handler(req, res) {
+    const ended = runCors(req, res);
+    if (ended) return;
 
   // GET: lấy comment theo video
   if (req.method === "GET") {
