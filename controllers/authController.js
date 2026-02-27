@@ -1,4 +1,5 @@
-import { getUserByUsername } from '../models/userModel.js';
+import { getUserByUsername } from '../models/userModel';
+
 export async function loginUser(req, res) {
   const { username, password } = req.body;
 
@@ -7,18 +8,15 @@ export async function loginUser(req, res) {
   }
 
   try {
+    // Truyền cả username và password để kiểm tra
     const { data: user, error } = await getUserByUsername(username, password);
 
     if (error || !user) {
-      console.log(`[LOGIN FAILED] username=${username}`);
       return res.status(401).json({ error: 'Sai tài khoản hoặc mật khẩu' });
     }
 
-    console.log(`[LOGIN SUCCESS] username=${username}`);
-    return res.status(200).json({ message: 'Đăng nhập thành công', user });
-
+    res.status(200).json({ message: 'Đăng nhập thành công', user });
   } catch (err) {
-    console.error("Server error:", err);
-    return res.status(500).json({ error: 'Lỗi server khi đăng nhập' });
+    res.status(500).json({ error: 'Lỗi server khi đăng nhập' });
   }
 }
