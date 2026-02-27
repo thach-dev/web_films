@@ -8,27 +8,27 @@
   ],
   "routes": [
     {
-      "src": "/api/stories",
+      "src": "/api/stories(.*)",
       "dest": "/api/stories/story.js"
     },
     {
-      "src": "/api/films",
+      "src": "/api/films(.*)",
       "dest": "/api/films/film.js"
     },
     {
-      "src": "/api/auth/login",
+      "src": "/api/auth/login(.*)",
       "dest": "/api/auth/login.js"
     },
     {
-      "src": "/api/banner",
+      "src": "/api/banner(.*)",
       "dest": "/api/banner/banner.js"
     },
     {
-      "src": "/api/news",
+      "src": "/api/news(.*)",
       "dest": "/api/news/news.js"
     },
     {
-      "src": "/api/comments",
+      "src": "/api/comments(.*)",
       "dest": "/api/comments/comment.js"
     }
   ]
