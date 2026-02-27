@@ -29,7 +29,7 @@
     },
     {
       "src": "/api/comments(.*)",
-      "dest": "/api/comments/comment.js"
+      "dest": "/api/comments/comments.js"
     }
   ]
 }
