@@ -10,7 +10,8 @@ export async function loginUser(req, res) {
   try {
     // Truyền cả username và password để kiểm tra
     const { data: user, error } = await getUserByUsername(username, password);
-
+    console.log(`[LOGIN FAILED] username=${username} | reason=wrong_password`);
+    
     if (error || !user) {
       return res.status(401).json({ error: 'Sai tài khoản hoặc mật khẩu' });
     }
