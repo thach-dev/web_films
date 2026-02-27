@@ -1,8 +1,6 @@
 import { getUserByUsername } from '../models/userModel.js';
 export async function loginUser(req, res) {
   const { username, password } = req.body;
-  console.log("Input username:", username);
-console.log("Input password:", password);
 
   if (!username || !password) {
     return res.status(400).json({ error: 'Thiếu tên đăng nhập hoặc mật khẩu' });
