@@ -1,7 +1,10 @@
 {
   "version": 2,
   "builds": [
-    { "src": "api/**/*.js", "use": "@vercel/node" }
+    {
+      "src": "api/**/*.js",
+      "use": "@vercel/node"
+    }
   ],
   "routes": [
     {
@@ -12,9 +15,9 @@
       "src": "/api/films",
       "dest": "/api/films/film.js"
     },
-    { 
-      "src": "/api/auth/login", 
-      "dest": "/api/auth/login.js" 
+    {
+      "src": "/api/auth/login",
+      "dest": "/api/auth/login.js"
     },
     {
       "src": "/api/banner",
@@ -23,6 +26,10 @@
     {
       "src": "/api/news",
       "dest": "/api/news/news.js"
+    },
+    {
+      "src": "/api/comments",
+      "dest": "/api/comments/comment.js"
     }
   ]
 }
