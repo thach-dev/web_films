@@ -12,6 +12,7 @@ export const CommentController = {
 
       const comments = await CommentModel.getByVideo(videoId);
       res.json(comments);
+
     } catch (error) {
       console.error(error);
       res.status(500).json({ message: "Lỗi server" });
@@ -20,17 +21,16 @@ export const CommentController = {
 
   async addComment(req, res) {
     try {
-      console.log("==== ADD COMMENT DEBUG ====");
-      console.log("Body:", req.body);
 
-      const { video_id, content, parent_id } = req.body;
+      const { video_id, content, parent_id, user_id } = req.body;
 
-      const user_id = req.session?.user?.id;
-
-      console.log("User ID:", user_id);
-
+      // 🔥 kiểm tra user_id từ frontend
       if (!user_id) {
         return res.status(401).json({ message: "Chưa đăng nhập" });
+      }
+
+      if (!video_id || !content) {
+        return res.status(400).json({ message: "Thiếu dữ liệu" });
       }
 
       const newComment = await CommentModel.create({
@@ -46,13 +46,16 @@ export const CommentController = {
       console.error("🔥 Server error:", error);
       res.status(500).json({ message: "Lỗi server" });
     }
-  }, 
+  },
 
   async deleteComment(req, res) {
     try {
       const { id } = req.params;
+
       const result = await CommentModel.softDelete(id);
+
       res.json(result);
+
     } catch (error) {
       console.error(error);
       res.status(500).json({ message: "Lỗi server" });
