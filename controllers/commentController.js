@@ -58,11 +58,14 @@ export const CommentController = {
   // =========================
   async deleteComment(req, res) {
     try {
-      const { id } = req.query;
-      const userId = req.user.id; // 🔥 lấy từ token
+      const { id, user_id } = req.query;
 
       if (!id) {
         return res.status(400).json({ message: "Thiếu id" });
+      }
+
+      if (!user_id) {
+        return res.status(401).json({ message: "Chưa đăng nhập" });
       }
 
       const comment = await CommentModel.findById(id);
@@ -71,7 +74,7 @@ export const CommentController = {
         return res.status(404).json({ message: "Comment không tồn tại" });
       }
 
-      if (comment.user_id !== userId) {
+      if (comment.user_id !== Number(user_id)) {
         return res.status(403).json({ message: "Không có quyền xoá" });
       }
 
@@ -87,5 +90,4 @@ export const CommentController = {
       return res.status(500).json({ message: error.message });
     }
   }
-
 };
