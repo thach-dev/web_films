@@ -58,13 +58,14 @@ export const CommentController = {
   // =========================
   async deleteComment(req, res) {
     try {
-      const { id, user_id } = req.query;
+      const id = Number(req.query.id);
+      const userId = Number(req.query.user_id);
 
       if (!id) {
         return res.status(400).json({ message: "Thiếu id" });
       }
 
-      if (!user_id) {
+      if (!userId) {
         return res.status(401).json({ message: "Chưa đăng nhập" });
       }
 
@@ -74,20 +75,22 @@ export const CommentController = {
         return res.status(404).json({ message: "Comment không tồn tại" });
       }
 
-      if (comment.user_id !== Number(user_id)) {
+      if (Number(comment.user_id) !== userId) {
         return res.status(403).json({ message: "Không có quyền xoá" });
       }
 
-      const result = await CommentModel.softDelete(id);
+      await CommentModel.softDelete(id);
 
       return res.status(200).json({
-        message: "Xoá thành công",
-        data: result
+        message: "Xoá thành công"
       });
 
     } catch (error) {
       console.error("DELETE COMMENT ERROR:", error);
-      return res.status(500).json({ message: error.message });
+      return res.status(500).json({
+        message: "Server error",
+        error: error.message
+      });
     }
   }
 };

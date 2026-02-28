@@ -2,7 +2,6 @@ import { supabase } from "../lib/supabaseClient.js";
 
 export const CommentModel = {
 
-  // Lấy comment theo video
   async getByVideo(videoId) {
     const { data, error } = await supabase
       .from("comments")
@@ -21,27 +20,37 @@ export const CommentModel = {
     return data;
   },
 
-  // Thêm comment
   async create(comment) {
     const { data, error } = await supabase
       .from("comments")
       .insert([comment])
-      .select();
+      .select()
+      .single(); // 🔥 nên thêm single luôn
 
     if (error) throw error;
     return data;
   },
 
-  // Soft delete
+  async findById(id) {
+    const { data, error } = await supabase
+      .from("comments")
+      .select("*")
+      .eq("id", id)
+      .single();
+
+    if (error) throw error;
+    return data;
+  },
+
   async softDelete(id) {
     const { data, error } = await supabase
       .from("comments")
       .update({ is_deleted: true })
       .eq("id", id)
-      .select();
+      .select()
+      .single();
 
     if (error) throw error;
     return data;
   }
-
 };
