@@ -4,10 +4,13 @@ export const CommentController = {
 
   async getComments(req, res) {
     try {
-      const { videoId } = req.params;
+      const { videoId } = req.query; // sửa ở đây
+
+      if (!videoId) {
+        return res.status(400).json({ message: "Thiếu videoId" });
+      }
 
       const comments = await CommentModel.getByVideo(videoId);
-
       res.json(comments);
     } catch (error) {
       console.error(error);
