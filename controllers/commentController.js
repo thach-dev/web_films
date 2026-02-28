@@ -58,14 +58,22 @@ export const CommentController = {
   // =========================
   async deleteComment(req, res) {
     try {
-      // 🔥 QUAN TRỌNG: dùng query thay vì params trên Vercel
       const { id } = req.query;
+      const userId = req.user.id; // 🔥 lấy từ token
 
       if (!id) {
         return res.status(400).json({ message: "Thiếu id" });
       }
 
-      console.log("DELETE ID:", id);
+      const comment = await CommentModel.findById(id);
+
+      if (!comment) {
+        return res.status(404).json({ message: "Comment không tồn tại" });
+      }
+
+      if (comment.user_id !== userId) {
+        return res.status(403).json({ message: "Không có quyền xoá" });
+      }
 
       const result = await CommentModel.softDelete(id);
 
