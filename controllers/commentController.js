@@ -2,6 +2,9 @@ import { CommentModel } from "../models/CommentModel.js";
 
 export const CommentController = {
 
+  // =========================
+  // GET COMMENTS
+  // =========================
   async getComments(req, res) {
     try {
       const { videoId } = req.query;
@@ -11,20 +14,22 @@ export const CommentController = {
       }
 
       const comments = await CommentModel.getByVideo(videoId);
-      res.json(comments);
+
+      return res.status(200).json(comments);
 
     } catch (error) {
-      console.error(error);
-      res.status(500).json({ message: "Lỗi server" });
+      console.error("GET COMMENTS ERROR:", error);
+      return res.status(500).json({ message: error.message });
     }
   },
 
+  // =========================
+  // ADD COMMENT
+  // =========================
   async addComment(req, res) {
     try {
-
       const { video_id, content, parent_id, user_id } = req.body;
 
-      // 🔥 kiểm tra user_id từ frontend
       if (!user_id) {
         return res.status(401).json({ message: "Chưa đăng nhập" });
       }
@@ -40,25 +45,38 @@ export const CommentController = {
         content
       });
 
-      res.status(201).json(newComment);
+      return res.status(201).json(newComment);
 
     } catch (error) {
-      console.error("🔥 Server error:", error);
-      res.status(500).json({ message: "Lỗi server" });
+      console.error("ADD COMMENT ERROR:", error);
+      return res.status(500).json({ message: error.message });
     }
   },
 
+  // =========================
+  // DELETE COMMENT (FIXED)
+  // =========================
   async deleteComment(req, res) {
     try {
-      const { id } = req.params;
+      // 🔥 QUAN TRỌNG: dùng query thay vì params trên Vercel
+      const { id } = req.query;
+
+      if (!id) {
+        return res.status(400).json({ message: "Thiếu id" });
+      }
+
+      console.log("DELETE ID:", id);
 
       const result = await CommentModel.softDelete(id);
 
-      res.json(result);
+      return res.status(200).json({
+        message: "Xoá thành công",
+        data: result
+      });
 
     } catch (error) {
-      console.error(error);
-      res.status(500).json({ message: "Lỗi server" });
+      console.error("DELETE COMMENT ERROR:", error);
+      return res.status(500).json({ message: error.message });
     }
   }
 
