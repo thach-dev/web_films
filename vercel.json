@@ -32,7 +32,7 @@
       "dest": "/api/comments/comments.js"
     },
     {
-      "src": "/api/films_hot(.*)",
+      "src": "/api/hot_films(.*)",
       "dest": "/api/films_hot/films_hot.js"
     }
   ]
