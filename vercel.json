@@ -30,6 +30,10 @@
     {
       "src": "/api/comments(.*)",
       "dest": "/api/comments/comments.js"
+    },
+    {
+      "src": "/api/films_hot(.*)",
+      "dest": "/api/films_hot/films_hot.js"
     }
   ]
 }
